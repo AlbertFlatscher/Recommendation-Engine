@@ -8460,14 +8460,17 @@ The 3 most similar users to user 46 are: [4201, 3782, 23]
 <span class="sd">    INPUT:</span>
 <span class="sd">    article_ids - (list) a list of article ids</span>
 <span class="sd">    df - (pandas dataframe) df as defined at the top of the notebook</span>
-
+<span class="sd">    </span>
 <span class="sd">    OUTPUT:</span>
 <span class="sd">    article_names - (list) a list of article names associated with the list of article ids </span>
 <span class="sd">                    (this is identified by the title column)</span>
 <span class="sd">    '''</span>
-    <span class="c1"># convert article ids to in</span>
-    <span class="n">article_ids_int</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">article_id</span><span class="p">))</span> <span class="k">for</span> <span class="n">article_id</span> <span class="ow">in</span> <span class="n">article_ids</span><span class="p">]</span>
-    <span class="n">article_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'article_id'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">article_ids_int</span><span class="p">)][</span><span class="s1">'title'</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()))</span>
+    <span class="c1"># Your code here</span>
+    <span class="n">article_names</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">article_id</span> <span class="ow">in</span> <span class="n">article_ids</span><span class="p">:</span>
+        <span class="n">article_name</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'article_id'</span><span class="p">]</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="n">article_id</span><span class="p">)][</span><span class="s1">'title'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">article_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">article_name</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">article_names</span> <span class="c1"># Return the article names associated with list of article ids</span>
 
@@ -8491,6 +8494,8 @@ The 3 most similar users to user 46 are: [4201, 3782, 23]
     <span class="n">user_row</span> <span class="o">=</span> <span class="n">user_item</span><span class="p">[</span><span class="n">user_item</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">user_id</span><span class="p">]</span>
     
     <span class="n">article_ids</span> <span class="o">=</span> <span class="n">user_item</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">user_row</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()]</span><span class="o">.</span><span class="n">droplevel</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+    <span class="c1"># article_ids_int = [int(float_id) for float_id in article_ids]</span>
 
     <span class="n">article_ids_str</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">article_id</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">article_id</span> <span class="ow">in</span> <span class="n">article_ids</span><span class="p">]</span>
 
@@ -8568,16 +8573,16 @@ The 3 most similar users to user 46 are: [4201, 3782, 23]
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>['the nurse assignment problem',
+<pre>['analyze precipitation data',
+ 'using deep learning with keras to predict customer churn',
  'analyze accident reports on amazon emr spark',
- 'how to map usa rivers using ggplot2',
- 'real-time sentiment analysis of twitter hashtags with spark (+ pixiedust)',
- 'airbnb data for analytics: venice reviews',
- 'data visualization: the importance of excluding unnecessary details',
  'working with ibm cloud object storage in python',
- 'insights from new york car accident reports',
- 'data visualization with ggplot2 cheat sheet',
- 'probabilistic graphical models tutorial\u200a—\u200apart 2 – stats and bots']</pre>
+ 'data visualization: the importance of excluding unnecessary details',
+ 'develop a scala spark model on chicago building violations',
+ 'flightpredict ii: the sequel  – ibm watson data lab',
+ 'airbnb data for analytics: venice reviews',
+ "i'd rather predict basketball games than elections: elastic nba rankings",
+ 'the nurse assignment problem']</pre>
 </div>
 </div>
 </div>
@@ -8679,12 +8684,12 @@ The 3 most similar users to user 46 are: [4201, 3782, 23]
     <span class="n">most_similar_users</span> <span class="o">=</span> <span class="n">similarity</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
     <span class="c1"># determine number of article interactions for each user</span>
-    <span class="n">num_interactions</span> <span class="o">=</span> <span class="n">user_item</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">num_interactions</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'user_id'</span><span class="p">)[</span><span class="s1">'article_id'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 
     <span class="c1"># create df</span>
     <span class="n">neighbors_unsorted</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'neighbor_id'</span><span class="p">:</span> <span class="n">similarity</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>\
                                        <span class="s1">'similarity'</span><span class="p">:</span> <span class="n">similarity</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>\
-                                       <span class="s1">'num_interactions'</span><span class="p">:</span> <span class="n">num_interactions</span><span class="p">})</span>
+                                       <span class="s1">'num_interactions'</span><span class="p">:</span> <span class="n">num_interactions</span><span class="p">[</span><span class="n">similarity</span><span class="o">.</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">})</span>
 
     <span class="c1"># sort df</span>
     <span class="n">neighbors_df</span> <span class="o">=</span> <span class="n">neighbors_unsorted</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">'similarity'</span><span class="p">,</span> <span class="s1">'num_interactions'</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -8716,24 +8721,29 @@ The 3 most similar users to user 46 are: [4201, 3782, 23]
 <span class="sd">   </span>
 <span class="sd">    '''</span>
     <span class="c1"># determine similar users</span>
-    <span class="n">similar_users</span> <span class="o">=</span> <span class="n">get_top_sorted_users</span><span class="p">(</span><span class="n">user_id</span><span class="p">)[</span><span class="s1">'neighbor_id'</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">similar_users</span> <span class="o">=</span> <span class="n">get_top_sorted_users</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="c1">#['neighbor_id'].to_list()</span>
     <span class="n">seen_ids</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_user_articles</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+
+    <span class="c1"># Grouping articles by interaction count</span>
+    <span class="n">article_interactions</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'article_id'</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">'user_id'</span><span class="p">]</span>
 
     <span class="n">recs</span> <span class="o">=</span> <span class="p">[]</span>
 
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">similar_users</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="c1"># getting article ids for each user</span>
+        <span class="n">article_ids</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_user_articles</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="s1">'neighbor_id'</span><span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">similar_users</span><span class="p">:</span>
-        <span class="c1"># determine articles read by similar users</span>
-        <span class="n">article_ids</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_user_articles</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-
-        <span class="c1"># add only new articles that the user hasn't seen</span>
+        <span class="c1"># converting article ids to float values</span>
+        <span class="n">article_ids</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">article_ids</span><span class="p">]</span> 
         <span class="n">new_recs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">article_ids</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">seen_ids</span><span class="p">))</span>
 
-        <span class="n">recs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_recs</span><span class="p">)</span>
-
-        <span class="c1"># remove duplicates and stop if we have enough recommendations</span>
-        <span class="n">recs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">recs</span><span class="p">))</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">recs</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">:</span>
+        <span class="c1"># sorting list of interactions from highest to lowest value</span>
+        <span class="n">recs_to_add</span> <span class="o">=</span> <span class="n">article_interactions</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">new_recs</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
+        <span class="c1"># creating new recommendations list</span>
+        <span class="n">recs_to_add_list</span> <span class="o">=</span> <span class="n">recs_to_add</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> 
+        <span class="c1"># creating article id recommendation list with no duplicate article ids</span>
+        <span class="p">[</span><span class="n">recs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">recs_to_add_list</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">recs</span><span class="p">]</span> 
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">recs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">:</span>
             <span class="k">break</span>
 
     <span class="n">recs</span> <span class="o">=</span> <span class="n">recs</span><span class="p">[:</span><span class="n">m</span><span class="p">]</span>
@@ -8774,10 +8784,10 @@ The 3 most similar users to user 46 are: [4201, 3782, 23]
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>The top 10 recommendations for user 20 are the following article ids:
-['1354.0', '681.0', '1324.0', '1433.0', '1396.0', '1410.0', '1391.0', '362.0', '1424.0', '205.0']
+[1330.0, 1427.0, 1364.0, 1170.0, 1162.0, 1304.0, 1351.0, 1160.0, 1354.0, 1368.0]
 
 The top 10 recommendations for user 20 are the following article names:
-['real-time sentiment analysis of twitter hashtags with spark (+ pixiedust)', 'use spark for python to load data and run sql queries', 'ibm watson facebook posts for 2015', 'visualize the 1854 london cholera outbreak', 'times world university ranking analysis', 'sudoku', "a beginner's guide to variational methods", 'uci: sms spam collection', 'dsx: hybrid mode', 'movie recommender system with spark machine learning']
+['insights from new york car accident reports', 'use xgboost, scikit-learn &amp; ibm watson machine learning apis', 'predicting churn with the spss random tree algorithm', 'apache spark lab, part 1: basic concepts', 'analyze energy consumption in buildings', 'gosales transactions for logistic regression model', 'model bike sharing data with spss', 'analyze accident reports on amazon emr spark', 'movie recommender system with spark machine learning', 'putting a human face on machine learning']
 </pre>
 </div>
 </div>
@@ -9305,7 +9315,7 @@ The top 10 recommendations for user 20 are the following article names:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>In contridiction to the lesson our matrix is complete. Therefore SVD is possible (instead of FunkSVD as in the lesson).</p>
+<p>In contradiction to the lesson our matrix is complete. Therefore SVD is possible. In the lesson we needed to use FunkSVD instead of SVD because the user_item was sparse. When the user_item has empyt cells (NaN) SVD is not possible. A viable alternative is FunkSVD.</p>
 </div>
 </div>
 </div>
@@ -9457,9 +9467,9 @@ The top 10 recommendations for user 20 are the following article names:
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>C:\Users\P335437\AppData\Local\Temp\1\ipykernel_19472\3177545400.py:21: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+<pre>C:\Users\P335437\AppData\Local\Temp\1\ipykernel_10120\3177545400.py:21: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
   user_item_train = user_item_train.applymap(lambda x: 1.0 if x &gt; 0 else 0.0)
-C:\Users\P335437\AppData\Local\Temp\1\ipykernel_19472\3177545400.py:28: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+C:\Users\P335437\AppData\Local\Temp\1\ipykernel_10120\3177545400.py:28: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
   user_item_test = user_item_test.applymap(lambda x: 1.0 if x &gt; 0 else 0.0)
 </pre>
 </div>
@@ -9751,6 +9761,11 @@ C:\Users\P335437\AppData\Local\Temp\1\ipykernel_19472\3177545400.py:28: FutureWa
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>We see high accuracy, even with a only 10 latent features. The main limitation of the method is that it relies solely on a binary user-item matrix, where interactions are represented as 0 (no interaction) or 1 (interaction). This approach lacks information on user ratings of the articles, which could provide valuable insights into how helpful a user found a specific article. Incorporating these ratings would enhance the accuracy and effectiveness of our recommendation system.</p>
+<p>The downward curve in test accuracy observed as the number of latent features increases can be attributed to several factors, primarily related to overfitting, model complexity, and the bias-variance trade-off.</p>
+<p>A model with more latent features is inherently more complex. While a complex model can perfectly fit the training data, it may not perform well on new data due to its over-reliance on the specific details of the training set. This complexity can cause the model to fail to generalize, leading to poorer performance on the test set.</p>
+<p>Models with more latent features have lower bias but higher variance, making them prone to overfitting.</p>
+<p>We used cross-validation for selecting the optimal number of latent features that minimizes the overfitting risk.</p>
+<p>We do not have ratings of the articles, which would help us by consiering how much a user found a specific article helpful. Having this information would lead to an improvement in our recommendation system.</p>
 </div>
 </div>
 </div>
